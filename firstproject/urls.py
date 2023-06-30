@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls), # URL for the admin page
      path('', views.home, name='home'),  # URL for the home page
     path('posts/', views.post_list, name='post_list'), # URL for the post list
+    path('post/create/', views.post_create, name='post_create'), # URL for post creation
     path('start/', views.start_page, name='start_page'), # URL for the start page
     path('success/', views.success, name='success'), # URL for the success page
+
 ]
