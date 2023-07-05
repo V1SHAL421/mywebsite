@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import WelcomeForm, PostForm
 from .models import Post
 
@@ -47,3 +47,12 @@ def success(request):
 
 def post_submission(request):
     return render(request, 'post_submission.html')
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    
+    if request.method == 'POST':
+        post.delete()
+        return redirect('post_list')
+    
+    return render(request, 'post_delete.html', {'post': post})
