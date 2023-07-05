@@ -34,7 +34,7 @@ def post_create(request):
             post = form.save()
             
             # Redirect to the post detail page or another view
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_submission')
     else:
         form = PostForm()
     
@@ -44,3 +44,6 @@ def post_create(request):
 
 def success(request):
     return render(request, 'success.html')
+
+def post_submission(request):
+    return render(request, 'post_submission.html')

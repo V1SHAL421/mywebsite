@@ -25,5 +25,6 @@ urlpatterns = [
     path('post/create/', views.post_create, name='post_create'), # URL for post creation
     path('start/', views.start_page, name='start_page'), # URL for the start page
     path('success/', views.success, name='success'), # URL for the success page
+    path('post_submission/', views.post_submission, name='post_submission'), # URL for the post sumbmission page
 
 ]
