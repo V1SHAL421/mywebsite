@@ -1,23 +1,28 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import WelcomeForm, PostForm
+from .forms import SignUpForm, PostForm
 from .models import Post
 
-def start_page(request):
+def sign_up(request):
     if request.method == 'POST':
-        form = WelcomeForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             # Process the form data
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
+            first_name = form.cleaned_data['Your Name']
+            surname = form.cleaned_data['Your Surname']
+            surname = form.cleaned_data['Userrname']
+            bio = form.cleaned_data['Bio']
+            email = form.cleaned_data['Your Email']
+            new_password = form.cleaned_data['Password']
+            password_confirmation = form.cleaned_data['Confirm Password']
             
             # Do something with the data, such as saving it to the database
             
             # Redirect to a success page or another view
             return redirect('success')
     else:
-        form = WelcomeForm()
+        form = SignUpForm()
     
-    return render(request, 'start_page.html', {'form': form})
+    return render(request, 'sign_up.html', {'form': form})
 
 def home(request):
     return render(request, 'home.html')

@@ -1,9 +1,22 @@
 from django import forms
 from myapp.models import Post
+from .models import User
 
-class WelcomeForm(forms.Form):
-    name = forms.CharField(label='Your Name')
-    email = forms.EmailField(label='Your Email')
+# class SignUpForm(forms.Form):
+#     first_name = forms.CharField(label='Your Name', max_length=30)
+#     surname = forms.CharField(label='Your Surname', max_length=30)
+#     username = forms.CharField(label='Username', max_length=30)
+#     bio = forms.CharField(label='Bio', max_length=500)
+#     email = forms.EmailField(label='Your Email')
+#     new_password = forms.CharField(label='Password', widget=forms.PasswordInput())
+#     password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())
+class SignUpForm(forms.Form):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'email', 'bio']
+        
+    new_password = forms.CharField(label='Password', widget=forms.PasswordInput())
+    password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())
 
 class PostForm(forms.ModelForm):
     class Meta:
