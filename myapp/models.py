@@ -11,4 +11,12 @@ class Post(models.Model):
 
 
 class User(AbstractUser):
-    bio = models.TextField()
+    bio = models.TextField() # AbstractUser class variables + bio
+
+#    first_name = forms.CharField(label='Your Name', max_length=30)
+#     surname = forms.CharField(label='Your Surname', max_length=30)
+#     username = forms.CharField(label='Username', max_length=30)
+#     bio = forms.CharField(label='Bio', max_length=500)
+#     email = forms.EmailField(label='Your Email')
+#     new_password = forms.CharField(label='Password', widget=forms.PasswordInput())
+#     password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())

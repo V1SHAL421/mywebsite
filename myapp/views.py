@@ -9,7 +9,7 @@ def sign_up(request):
             # Process the form data
             first_name = form.cleaned_data['Your Name']
             surname = form.cleaned_data['Your Surname']
-            surname = form.cleaned_data['Userrname']
+            username = form.cleaned_data['Username']
             bio = form.cleaned_data['Bio']
             email = form.cleaned_data['Your Email']
             new_password = form.cleaned_data['Password']
