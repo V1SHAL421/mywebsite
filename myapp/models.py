@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 
 class Post(models.Model):
@@ -11,12 +12,37 @@ class Post(models.Model):
 
 
 class User(AbstractUser):
-    bio = models.TextField() # AbstractUser class variables + bio
+    username = models.CharField(
+        max_length=30, 
+        unique=True,
+        validators=[RegexValidator(
+            regex=r'^@\w{3,}$',
+            message='Username must consist of @ followed by at least three alphanumericals'
+        )]
+        )
+    first_name = models.CharField(
+        max_length=30,
+        blank=False
+    )
 
-#    first_name = forms.CharField(label='Your Name', max_length=30)
-#     surname = forms.CharField(label='Your Surname', max_length=30)
-#     username = forms.CharField(label='Username', max_length=30)
-#     bio = forms.CharField(label='Bio', max_length=500)
-#     email = forms.EmailField(label='Your Email')
-#     new_password = forms.CharField(label='Password', widget=forms.PasswordInput())
-#     password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())
+    last_name = models.CharField(
+        max_length=30,
+        blank=False
+    )
+
+    email = models.EmailField(
+        unique=True,
+        blank=False,
+
+    )
+    
+    bio = models.CharField(
+        max_length=400,
+        blank=True
+        ) # AbstractUser class variables + bio
+    # first_name = models.CharField(label='Your Name', max_length=30)
+    # surname = models.CharField(label='Your Surname', max_length=30)
+    # bio = models.CharField(label='Bio', max_length=500)
+    # email = models.EmailField(label='Your Email')
+    # new_password = models.CharField(label='Password', widget=models.PasswordInput())
+    # password_confirmation = models.CharField(label='Confirm Password', widget=models.PasswordInput())
