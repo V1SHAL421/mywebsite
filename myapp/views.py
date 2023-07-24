@@ -19,7 +19,7 @@ def sign_up(request):
             
             # Redirect to a success page or another view
             return redirect('success')
-    else:
+    else: 
         form = SignUpForm()
     
     return render(request, 'sign_up.html', {'form': form})
