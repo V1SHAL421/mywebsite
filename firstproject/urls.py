@@ -27,6 +27,7 @@ urlpatterns = [
     path('posts/', views.post_list, name='post_list'), # URL for the post list
     path('post/create/', views.post_create, name='post_create'), # URL for post creation
     path('signup/', views.sign_up, name='sign_up'), # URL for the start page
+    path('login/', views.login, name='login'), # URL for the login page
     path('success/', views.success, name='success'), # URL for the success page
     path('post_submission/', views.post_submission, name='post_submission'), # URL for the post sumbmission page
     path('posts/<int:pk>/delete/', views.post_delete, name='post_delete'), # URL for deleting posts
