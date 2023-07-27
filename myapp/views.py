@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import SignUpForm, PostForm
+from .forms import LoginForm, SignUpForm, PostForm
 from .models import Post, User
 
 def sign_up(request):
@@ -19,7 +19,8 @@ def sign_up(request):
     return render(request, 'sign_up.html', {'form': form})
 
 def login(request):
-    return render(request, 'login.html')
+    form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 def home(request):
     return render(request, 'home.html')
