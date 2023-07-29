@@ -42,7 +42,7 @@ class SignUpForm(forms.ModelForm):
             )
         return user
 
-class LoginForm(forms.Form):
+class LogInForm(forms.Form):
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 

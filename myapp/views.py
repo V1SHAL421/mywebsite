@@ -1,5 +1,6 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import LoginForm, SignUpForm, PostForm
+from .forms import LogInForm, SignUpForm, PostForm
 from .models import Post, User
 
 def sign_up(request):
@@ -7,7 +8,8 @@ def sign_up(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             # Process the form data
-            form.save()
+            user = form.save()
+            login(request, user)
             # Saves data to the database
             
             # Redirect to a success page or another view
@@ -18,9 +20,25 @@ def sign_up(request):
         form = SignUpForm()
     return render(request, 'sign_up.html', {'form': form})
 
-def login(request):
-    form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+def log_in(request):
+    if request.method == 'POST':
+        form = LogInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                # Redirect the user to a success page or another view
+                return redirect('success')
+            else:
+                # Handle invalid login credentials, e.g., display an error message
+                form.add_error(None, "Invalid username or password.")
+
+    else: 
+        form = LogInForm()
+
+    return render(request, 'log_in.html', {'form': form})
 
 def home(request):
     return render(request, 'home.html')

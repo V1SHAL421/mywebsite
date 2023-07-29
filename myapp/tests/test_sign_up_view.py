@@ -5,8 +5,9 @@ from django.urls import reverse
 
 from myapp.forms import SignUpForm
 from myapp.models import User
+from .helpers import LogInTester
 
-class SignUpViewTestCase(TestCase):
+class SignUpViewTestCase(TestCase, LogInTester):
     """Tests of the sign up view"""
 
     def setUp(self):
@@ -45,6 +46,7 @@ class SignUpViewTestCase(TestCase):
         form = response.context['form']
         self.assertTrue(isinstance(form, SignUpForm))
         self.assertTrue(form.is_bound)
+        self.assertFalse(self._is_logged_in())
 
     def test_successful_sign_up(self):
         before_count = User.objects.count()
@@ -61,4 +63,5 @@ class SignUpViewTestCase(TestCase):
         self.assertEqual(user.bio, 'My bio')
         is_password_correct = check_password('Password123', user.password) # compares hash of password
         self.assertTrue(is_password_correct)
+        self.assertTrue(self._is_logged_in())
     
