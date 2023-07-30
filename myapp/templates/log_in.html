@@ -2,6 +2,9 @@
 <html>
 <head>
     <h1>Log in</h1>
+    {% for msg in messages %}
+        <p><b>{{ msg }}</b></p>
+    {% endfor %}
 
     <form action="{% url 'log_in' %}" method="post">
         {% csrf_token %}

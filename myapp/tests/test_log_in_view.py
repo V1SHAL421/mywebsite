@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from django.urls import reverse
@@ -31,6 +32,8 @@ class LogInViewTestCase(TestCase, LogInTester):
         form = response.context['form']
         self.assertTrue(isinstance(form, LogInForm))
         self.assertFalse(form.is_bound)
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 0)
 
     def test_unsuccessful_log_in(self):
         form_input = {'username': '@johndoe', 'password': 'WrongPassword123'}
@@ -39,8 +42,10 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTemplateUsed(response, 'log_in.html')
         form = response.context['form']
         self.assertTrue(isinstance(form, LogInForm))
-        self.assertTrue(form.errors)  # Check if the form contains errors
-        self.assertFalse(self._is_logged_in())  
+        self.assertFalse(self._is_logged_in())
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(messages_list[0].level, messages.ERROR)
 
 
     def test_successful_log_in(self):
@@ -53,6 +58,8 @@ class LogInViewTestCase(TestCase, LogInTester):
         response = self.client.post(self.url, form_input, follow=True)
         self.assertRedirects(response, reverse('success'), status_code=302, target_status_code=200)
         self.assertTrue(self._is_logged_in())
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 0)
 
     def test_valid_log_in_by_inactive_user(self):
         self.user.is_active = False
@@ -62,8 +69,10 @@ class LogInViewTestCase(TestCase, LogInTester):
         self.assertTemplateUsed(response, 'log_in.html')
         form = response.context['form']
         self.assertTrue(isinstance(form, LogInForm))
-        self.assertTrue(form.errors)  # Check if the form contains errors related to inactive account
         self.assertFalse(self._is_logged_in())
+        messages_list = list(response.context['messages'])
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(messages_list[0].level, messages.ERROR)
 
 
 

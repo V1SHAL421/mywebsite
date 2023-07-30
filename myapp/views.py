@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import LogInForm, SignUpForm, PostForm
@@ -33,7 +34,7 @@ def log_in(request):
                 return redirect('success')
             else:
                 # Handle invalid login credentials, e.g., display an error message
-                form.add_error(None, "Invalid username or password.")
+                messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
 
     else: 
         form = LogInForm()
