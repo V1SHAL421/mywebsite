@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import LogInForm, SignUpForm, PostForm
 from .models import Post, User
@@ -40,6 +40,10 @@ def log_in(request):
         form = LogInForm()
 
     return render(request, 'log_in.html', {'form': form})
+
+def log_out(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     return render(request, 'home.html')

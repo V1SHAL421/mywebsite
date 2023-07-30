@@ -1,3 +1,4 @@
+"""Tests of the log in view"""
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
