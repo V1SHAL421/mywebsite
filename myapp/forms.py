@@ -2,14 +2,16 @@ from django import forms
 from myapp.models import Post
 from .models import User
 from django.core.validators import RegexValidator
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit
 
 class SignUpForm(forms.ModelForm):
-    class Meta:
+    class Meta: # provides metadata about sign up form
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'bio']
         widgets = { 'bio': forms.Textarea() }
         
-    new_password = forms.CharField(
+    new_password = forms.CharField( # states regulations for password
         label='Password',
         widget=forms.PasswordInput(),
         validators=[
@@ -20,16 +22,36 @@ class SignUpForm(forms.ModelForm):
             )
         ]
     )
-    password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())
+    password_confirmation = forms.CharField(label='Confirm Password', widget=forms.PasswordInput()) # confirms password
 
-    def clean(self):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_password'].widget = forms.PasswordInput()
+        self.fields['password_confirmation'].widget = forms.PasswordInput()
+
+        # Create a crispy form helper and define the form layout
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.add_input(Submit('submit', 'Sign up'))
+        self.helper.layout = Layout(
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'bio',
+            'new_password',
+            'password_confirmation',
+        )
+
+    def clean(self): # overidden to perform additional validation and error handling
         super().clean() # creates instance var for class
         new_password = self.cleaned_data.get('new_password')
         password_confirmation = self.cleaned_data.get('password_confirmation')
         if new_password != password_confirmation:
             self.add_error('password_confirmation', 'Confirmation does not match password.')
+        # checks to see if passwords match
 
-    def save(self):
+    def save(self): # overidden to save new User object to database
         super().save(commit=False)
         user = User.objects.create_user(
                 self.cleaned_data.get('username'),
@@ -42,11 +64,11 @@ class SignUpForm(forms.ModelForm):
             )
         return user
 
-class LogInForm(forms.Form):
+class LogInForm(forms.Form): # user login functionality
     username = forms.CharField(label='Username')
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 
-class PostForm(forms.ModelForm):
+class PostForm(forms.ModelForm): # creating posts
     class Meta:
         model = Post
         fields = ['title', 'content']
