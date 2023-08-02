@@ -10,7 +10,20 @@
 
             <form action="{% url 'sign_up' %}" method="post">
                 {% csrf_token %}
-                {% crispy form %}
+                {% for field in form %}
+                    <div class="="form-group {% if field.errors %}is-invalid{% elif field.value %}is-valid{% endif %}>
+                        {{ field|as_crispy_field }}
+                        {% if field.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in field.errors %}
+                                    {{error}}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">Sign up</button>
             </form>
         </div>
     </div>
