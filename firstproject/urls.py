@@ -32,6 +32,7 @@ urlpatterns = [
     path('post_submission/', views.post_submission, name='post_submission'), # URL for the post sumbmission page
     path('posts/<int:pk>/delete/', views.post_delete, name='post_delete'), # URL for deleting posts
     path('log_out/', views.log_out, name='log_out'), # URL for the log out page
+    path('feed/', views.feed, name='feed'), # URL for the feed page
 
 ]
 
