@@ -13,7 +13,7 @@ def sign_up(request):
             login(request, user)
             # Saves data to the database
             
-            # Redirect to a success page or another view
+            # Redirect to success page
             return redirect('success')
         else:
             print(form.errors)
@@ -30,8 +30,8 @@ def log_in(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Redirect the user to a success page or another view
-                return redirect('success')
+                # Redirect the user to field page
+                return redirect('feed')
             else:
                 # Handle invalid login credentials, e.g., display an error message
                 messages.add_message(request, messages.ERROR, "The credentials provided were invalid!")
@@ -70,6 +70,9 @@ def post_create(request):
 
 def success(request):
     return render(request, 'success.html')
+
+def feed(request):
+    return render(request, 'feed.html')
 
 def post_submission(request):
     return render(request, 'post_submission.html')
