@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 from myapp.forms import LogInForm
 from myapp.models import User
-from .helpers import LogInTester
+from ..helpers import LogInTester
 from django.contrib.auth import get_user_model 
 
 class LogInViewTestCase(TestCase, LogInTester):
