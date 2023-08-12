@@ -11,6 +11,7 @@ from django.contrib.auth import get_user_model
 class LogInViewTestCase(TestCase, LogInTester):
     """Tests of the log in view"""
 
+
     def setUp(self):
         self.url = reverse('log_in')
         custom_user = get_user_model()
