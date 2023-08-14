@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from myapp.forms import SignUpForm
 from myapp.models import User
-from .helpers import LogInTester
+from ..helpers import LogInTester
 
 class SignUpViewTestCase(TestCase, LogInTester):
     """Tests of the sign up view"""

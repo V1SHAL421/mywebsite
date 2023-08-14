@@ -5,11 +5,12 @@ from django.test import TestCase
 from django.urls import reverse
 from myapp.forms import LogInForm
 from myapp.models import User
-from .helpers import LogInTester
+from ..helpers import LogInTester
 from django.contrib.auth import get_user_model 
 
 class LogInViewTestCase(TestCase, LogInTester):
     """Tests of the log in view"""
+
 
     def setUp(self):
         self.url = reverse('log_in')
@@ -57,7 +58,7 @@ class LogInViewTestCase(TestCase, LogInTester):
     def test_successful_log_in_redirect(self):
         form_input = {'username': '@johndoe', 'password': 'Password123'}
         response = self.client.post(self.url, form_input, follow=True)
-        self.assertRedirects(response, reverse('success'), status_code=302, target_status_code=200)
+        self.assertRedirects(response, reverse('feed'), status_code=302, target_status_code=200)
         self.assertTrue(self._is_logged_in())
         messages_list = list(response.context['messages'])
         self.assertEqual(len(messages_list), 0)
