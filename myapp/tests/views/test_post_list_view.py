@@ -1,10 +1,7 @@
 """Tests of the post list view"""
-from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from django.urls import reverse
-from myapp.forms import LogInForm
-from myapp.models import User
 from ..helpers import LogInTester
 from django.contrib.auth import get_user_model 
 
