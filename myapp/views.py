@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import LogInForm, SignUpForm, PostForm
 from .models import Post, User
@@ -48,10 +49,12 @@ def log_out(request):
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'post_list.html', {'posts': posts})
 
+@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -71,12 +74,15 @@ def post_create(request):
 def success(request):
     return render(request, 'success.html')
 
+@login_required
 def feed(request):
     return render(request, 'feed.html')
 
+@login_required
 def post_submission(request):
     return render(request, 'post_submission.html')
 
+@login_required
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     
