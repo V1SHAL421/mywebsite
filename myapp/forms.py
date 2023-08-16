@@ -3,7 +3,7 @@ from myapp.models import Post
 from .models import User
 from django.core.validators import RegexValidator
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit
+from crispy_forms.layout import Layout, Submit, Field
 
 class SignUpForm(forms.ModelForm):
     class Meta: # provides metadata about sign up form
@@ -72,6 +72,10 @@ class PostForm(forms.ModelForm): # creating posts
     class Meta:
         model = Post
         fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'required': True}),
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -79,6 +83,8 @@ class PostForm(forms.ModelForm): # creating posts
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create'))
         self.helper.layout = Layout(
-            'Title',
-            'Content',
+            Field('title', css_class='form-control', required=True),
+            Field('content', css_class='form-control', required=True),
         )
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control', 'required': 'required'})
