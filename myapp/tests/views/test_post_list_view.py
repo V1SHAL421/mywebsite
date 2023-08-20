@@ -43,4 +43,4 @@ class PostListViewTestCase(TestCase, LogInTester):
         Post.objects.all().delete()
         self.client.login(username=self.user.username, password="Password123")
         response = self.client.get(self.url)
-        self.assertContains(response, "No posts available.")
+        self.assertContains(response, "You have not created a post yet.")
