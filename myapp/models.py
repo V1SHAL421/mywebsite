@@ -3,9 +3,10 @@ from django.core.validators import RegexValidator
 from django.db import models
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
+    date = models.DateField()
+    title = models.TextField(max_length=50, default='I had fun today!')
     content = models.TextField()
-    pub_date = models.DateTimeField(auto_now_add=True)
+    
 
     class Meta:
         app_label = 'myapp'

@@ -11,9 +11,10 @@
             <ul>
                 {% for post in posts %}
                 <li>
-                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.date }}</p>
+                    <p>{{ post.title }}</p>
                     <p>{{ post.content }}</p>
-                    <p>Published on: {{ post.pub_date }}</p>
+                    <p>Published on: {{ post.date }}</p>
                     <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
                 </li>
                 {% endfor %}

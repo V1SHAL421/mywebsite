@@ -71,8 +71,9 @@ class LogInForm(forms.Form): # user login functionality
 class PostForm(forms.ModelForm): # creating posts
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['date', 'title', 'content']
         widgets = {
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': True}),
             'title': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'required': True}),
         }
@@ -83,6 +84,7 @@ class PostForm(forms.ModelForm): # creating posts
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Create'))
         self.helper.layout = Layout(
+            Field('date', css_class='form-control', required=True),
             Field('title', css_class='form-control', required=True),
             Field('content', css_class='form-control', required=True),
         )
