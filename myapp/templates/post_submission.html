@@ -1,3 +1,16 @@
-<h1>Submission!</h1>
-<p>Your post has been created</p>
-<li><a href="{% url 'home' %}">Home Page</a></li>
+{% extends 'base_content.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Submission Successful!</h1>
+            <p>Your post has been created</p>
+            <li><a href="{% url 'post_list' %}">View Diary</a></li>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

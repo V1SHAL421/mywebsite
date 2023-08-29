@@ -1,21 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blog</title>
-</head>
-<body class="diary">
-    <h1>Welcome to your diary</h1>
-    <ul>
-        {% for post in posts %}
-        <li>
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <p>Published on: {{ post.pub_date }}</p>
-        <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'home' %}">Home Page</a>
-    <a href="{% url 'post_create' %}">Create a New Post</a>
-</body>
-</html>
+{% extends 'base_content.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Welcome to your diary</h1>
+            {% if posts %}
+            <ul>
+                {% for post in posts %}
+                <li>
+                    <p>{{ post.date }}</p>
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.content }}</p>
+                    <p>Published on: {{ post.date }}</p>
+                    <a href="{% url 'post_delete' pk=post.pk %}">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>You have not created a post yet.</p>
+            {% endif %}
+            <a href="{% url 'home' %}">Home Page</a>
+            <a href="{% url 'post_create' %}">Create a New Post</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
