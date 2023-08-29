@@ -1,3 +1,18 @@
-<h1>Success!</h1>
-<p>Thank you for submitting the form.</p>
-<li><a href="{% url 'home' %}">Home Page</a></li>
+{% extends 'base_content.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Success!</h1>
+            <p>Thank you for submitting the form.</p>
+            <li><a href="{% url 'home' %}">Home Page</a></li>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
