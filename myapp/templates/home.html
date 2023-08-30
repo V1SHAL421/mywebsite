@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block body %}
 <div class="container vh-100">
     <div class="row h-100">
@@ -7,22 +8,38 @@
             <div class="card-offset-sm-1 offset-md-3 offset-lg-4">
                 <h1>Welcome to My Website</h1>
                 <p>This is the home page of my website.</p>
-                <ul>
-                    <li><a href="{% url 'post_list' %}" class="btn btn-lg btn secondary">
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'post_list' %}" class="btn btn-primary btn-lg">
                         View Diary
                         </a>
                     </li>
-                    <li><a href="{% url 'log_in' %}" class="btn btn-lg btn secondary">
+                    <li><a href="{% url 'log_in' %}" class="btn btn-success btn-lg">
                         Log in
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'sign_up' %}" class="btn btn-lg btn secondary">
+                        <a href="{% url 'sign_up' %}" class="btn btn-info btn-lg">
                         Sign Up
                         </a>
                     </li>
                 </ul>
             </div>
+        </div>
     </div>
 </div>
+
+<style>
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+    .container {
+        background-color: bisque;
+        border: 2px solid rebeccapurple;
+        margin: -10px;
+    }
+</style>
+
 {% endblock %}
