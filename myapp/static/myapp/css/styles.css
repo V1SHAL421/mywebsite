@@ -2,3 +2,9 @@
     background-color: cyan;
 }
 
+.website-image {
+    width: 20px; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+}
