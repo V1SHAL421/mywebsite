@@ -1,45 +1,48 @@
-{% extends 'base.html' %}
-
-{% load static %}
-
-{% block body %}
+{% extends 'base.html' %} {% load static %} {% block body %}
 <div class="container vh-100">
-    <div class="row h-100">
-        <div class="col-12 my-auto">
-            <div class="card-offset-sm-1 offset-md-3 offset-lg-4">
-                <h1>Welcome to DailyDelve</h1>
-                <p>Note down your adventures in your very own personal diary.</p>
-                <ul class="list-unstyled">
-                    <li><a href="{% url 'post_list' %}" class="btn btn-primary btn-lg">
-                        View Diary
-                        </a>
-                    </li>
-                    <li><a href="{% url 'log_in' %}" class="btn btn-success btn-lg">
-                        Log in
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'sign_up' %}" class="btn btn-info btn-lg">
-                        Sign Up
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+  <div class="row h-100">
+    <div class="col-12 my-auto">
+      <div class="card-offset-sm-1 offset-md-3 offset-lg-4">
+        <h1>Welcome to DailyDelve</h1>
+        <p>Note down your adventures in your very own personal diary.</p>
+        <ul class="list-unstyled">
+          <li>
+            <a href="{% url 'post_list' %}" class="btn btn-primary btn-lg">
+              View Diary
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'log_in' %}" class="btn btn-success btn-lg">
+              Log in
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'sign_up' %}" class="btn btn-info btn-lg">
+              Sign Up
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        overflow-x: scroll;
-        background-image: url('{% static "images/river.jpg" %}');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
+  h1 {
+    color: maroon;
+  }
+  p {
+    color: orange;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: scroll;
+    background-image: url('{% static "images/river.jpg" %}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 </style>
 
 {% endblock %}
-
